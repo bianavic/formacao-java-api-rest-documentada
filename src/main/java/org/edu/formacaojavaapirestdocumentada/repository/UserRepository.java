@@ -1,5 +1,7 @@
 package org.edu.formacaojavaapirestdocumentada.repository;
 
+import org.edu.formacaojavaapirestdocumentada.handler.BusinessException;
+import org.edu.formacaojavaapirestdocumentada.handler.RequiredFieldException;
 import org.edu.formacaojavaapirestdocumentada.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,10 @@ import java.util.List;
 public class UserRepository {
 
     public void save(User user){
+
+        if (user.getLogin() == null) throw new RequiredFieldException("login");
+        if (user.getPassword() == null) throw new RequiredFieldException("password");
+
         System.out.println("SAVE - Recebendo o usuário na camada de repositório");
         System.out.println(user);
     }
